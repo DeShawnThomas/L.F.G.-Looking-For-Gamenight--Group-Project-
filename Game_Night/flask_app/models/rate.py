@@ -23,7 +23,7 @@ class Rating:
     
     @classmethod
     def get_all_join_user(cls,data): # no data needed since grabbing all
-        query = "SELECT * FROM ratings Join users on ratings.user_id = users.id WHERE ratings.game_id = %(id)s;"
+        query = "SELECT * FROM ratings JOIN users on ratings.user_id = users.id WHERE ratings.game_id = %(id)s;"
         results = connectToMySQL("Game_Night_Schema").query_db(query,data)
         if len(results) == 0:
             return []
@@ -35,17 +35,17 @@ class Rating:
             
                 rating_object = cls(user_d)
                 new_user_d = {
-                  'id' : user_d ['users.id'],
-                  'first_name': user_d['first_name'],
-                  'last_name' : user_d['last_name'],
-                  'email': user_d['email'],
-                  'phone_number' : user_d['phone_number'],
-                  'U_location' : user_d['U_location'],
-                  'U_description' : user_d['U_description'],
-                  'U_image' : user_d['U_image'],
-                  'password' : user_d['password'],
-                  'created_at' : user_d['users.created_at'],
-                  'updated_at' : user_d['users.updated_at']
+                'id' : user_d ['users.id'],
+                'first_name': user_d['first_name'],
+                'last_name' : user_d['last_name'],
+                'email': user_d['email'],
+                'phone_number' : user_d['phone_number'],
+                'user_location' : user_d['user_location'],
+                'user_description' : user_d['user_description'],
+                'user_image' : user_d['user_image'],
+                'password' : user_d['password'],
+                'created_at' : user_d['users.created_at'],
+                'updated_at' : user_d['users.updated_at']
                 
                 }
         

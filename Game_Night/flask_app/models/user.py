@@ -7,6 +7,8 @@ from flask_app.models.game import Game
 
 class User:
 
+    db = "Game_Night_Schema"
+
     def __init__(self,data):
         self.id = data['id']
         self.first_name = data['first_name']
@@ -14,23 +16,22 @@ class User:
         self.email = data['email']
         self.password = data['password']
         self.phone_number = data['phone_number']
-        self.U_location = data['U_location']
-        self.U_description = data['U_description']
-        self.U_image = data['U_image']
+        self.user_location = data['user_location']
+        self.user_description = data['user_description']
+        self.user_image = data['user_image']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.games = []
 
 
-
     @classmethod
     def save(cls,data):
-        query = "INSERT INTO users (first_name,last_name,email,password,phone_number,U_location,U_description,U_image) VALUES(%(first_name)s,%(last_name)s,%(email)s,%(password)s,%(phone_number)s,%(U_location)s,%(U_description)s,%(U_image)s)"
+        query = "INSERT INTO users (first_name,last_name,email,phone_number,password,user_location,user_description,user_image) VALUES(%(first_name)s,%(last_name)s,%(email)s,%(phone_number)s,%(password)s,%(user_location)s,%(user_description)s,%(user_image)s)"
         return connectToMySQL("Game_Night_Schema").query_db(query,data)
     
     @classmethod
     def update(cls,data):
-        query = "UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, eamil=%(email)s, phone_number=%(phone_number)s, password=%(password)s, U_location=%(U_location)s, updated_at = NOW(), created_at = Now() WHERE id = %(id)s;"
+        query = "UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, eamil=%(email)s, phone_number=%(phone_number)s, password=%(password)s, user_location=%(user_location)s, user_description=%(user_description)s, updated_at = %(updated_at)s, WHERE id = %(id)s;"
         return connectToMySQL("moment_schema").query_db(query,data)
 
     @classmethod
@@ -57,7 +58,6 @@ class User:
         data = {'id':id}
         return cls(results[0])
     
-    
     @classmethod
     def get_one_game(cls, data ): 
         query = "SELECT * FROM users LEFT JOIN games on users.id = games.user_id WHERE users.id = %(id)s;" 
@@ -81,14 +81,6 @@ class User:
             User.games.append(Game(game))  
         return User
 
-
-
-
-
-
-
-
-
     @staticmethod
     def validate_user(user):
         is_valid = True
@@ -109,7 +101,7 @@ class User:
         if len(user['phone_number']) < 2:
             flash("phone number must be at least 10 characters", "regError")
             is_valid= False
-        if len(user['U_location']) < 2:
+        if len(user['user_location']) < 2:
             flash("Location must be at least 2 characters", "regError")
             is_valid= False
         if len(user['password']) < 8:
@@ -119,4 +111,6 @@ class User:
             flash("Passwords dont align","regError",)
         return is_valid
 
-   
+        @staticmethod
+        def check_password(password_hash, password):
+            return check_password_hash(password_hash, password)
