@@ -117,8 +117,6 @@ class User:
             is_valid= False
         if user['password'] != user['verify']:
             flash("Passwords dont align","regError",)
-       
-
         return is_valid
 
    
