@@ -236,7 +236,7 @@
 
 
 
-   /* addgame */
+   /* addgame/Edit Game*/
    .nav4{
     display: flex;
     justify-content: space-between;
@@ -247,9 +247,14 @@
 
    .addgame-container {
    text-align: center;
+   border: 2px solid black;
+   width: 500px;
+   margin-left: 350px;
+   padding: 20px;
+  
    }
 
-  
+
 
 
 
@@ -270,7 +275,7 @@
 
 
 
-   /* Search Results */
+   /* Search Results page */
    .nav6{
     display: flex;
     justify-content: space-between;
@@ -281,7 +286,7 @@
 
 
 
-
+/* my game nights page */
    .nav7{
     display: flex;
     justify-content: space-between;
