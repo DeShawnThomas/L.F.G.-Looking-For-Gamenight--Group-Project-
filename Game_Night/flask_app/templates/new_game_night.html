@@ -1,1 +1,69 @@
 <!-- This is the page to enter the new game night. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Host Game</title>
+</head>
+<body>
+    <div class="nav3">
+        <h1>New Game Night</h1>
+        <button class="dashboard">Dashboard</button>
+    </div>
+
+    <div class="container">
+      
+        <div class="content">
+          <form action="#">
+            <div class="user-details">
+              <div class="input-box">
+            
+                <label for="date">Date</label>
+                <input type="date" id="date">
+              </div>
+              <div class="input-box">
+                <label for="hosting">Are You Hosting?</label>
+               
+                 <select id="hosting">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                 </select>
+              </div>
+              <div class="input-box">
+                <span class="details">Location</span>
+                <input type="text" placeholder="Enter your Location">
+              </div>
+              <div class="input-box">
+                <span class="details">If not, Which user is?</span>
+                <input type="text" placeholder="Enter User">
+              </div>
+              <div class="input-box">
+                <span class="details">Description</span>
+                <input type="text" placeholder="Enter your Description">
+              </div>
+              <div class="input-box">
+                <label for="hosting">Max # of People?</label>
+               
+                <select id="hosting">
+                   <option value="1">1</option>
+                   <option value="2">2</option>
+                   <option value="3">3</option>
+                   <option value="4">4</option>
+                   <option value="5">5</option>
+                   <option value="6">6</option>
+                </select>
+              </div>
+            </div>
+            <div class="button">
+              <input type="submit" value="submit Game Night">
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+</body>
+</html>

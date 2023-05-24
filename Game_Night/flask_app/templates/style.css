@@ -1,0 +1,292 @@
+/* Beginning of our web */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333;
+    overflow: hidden;
+}
+
+.navbar a {
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.logo{
+    text-align: center;
+}
+
+
+
+
+
+
+/* long in */
+.login-container {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 60px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    text-align: center;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-container input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #2200ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+
+
+
+
+
+/* register/new game night page/edit page*/
+
+.container{
+    max-width: 700px;
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+     margin-left: 230px;
+  }
+  .container .title{
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+  }
+  
+  .content form .user-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+  }
+  form .user-details .input-box{
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 20px);
+  }
+  form .input-box span.details{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  .user-details .input-box input{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+  }
+  
+   form .option-details .host-title{
+    font-size: 20px;
+    font-weight: 500;
+   }
+   form .category{
+     display: flex;
+     width: 80%;
+     margin: 14px 0 ;
+     justify-content: space-between;
+   }
+   
+   form .button{
+     height: 45px;
+     margin: 35px 0
+   }
+   form .button input{
+     height: 100%;
+     width: 100%;
+     border-radius: 5px;
+     border: none;
+     color: #fff;
+     font-size: 18px;
+     font-weight: 500;
+     letter-spacing: 1px;
+     cursor: pointer;
+    
+    background-color: #2200ff;
+   }
+  
+
+
+
+
+
+
+
+   /* homePage */
+   .navbar2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0; /* Just for visualization */
+    padding: 10px;
+  }
+  
+  .logo-container {
+    margin-right: auto;
+    
+  }
+  
+  .logout-container {
+    margin-left: auto;
+  }
+
+  .logout{
+    background-color: #2200ff;
+    color: white;
+    border-radius: 17px;
+  }
+ 
+  .gamenights{
+    border: 2px solid black;
+    width: 600px;
+  }
+  
+  .user1{
+    display: flex;
+  }
+  
+  .search-bar{
+    margin-left: 400px;
+    width: 300px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid blue;
+  }
+
+  .games-profiles{
+    display: flex;
+    justify-content: space-between;
+  }
+ 
+  table {
+    border-collapse: collapse;
+    width: 200px;
+    margin-right: 100px;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid black;
+  }
+  
+  th {
+    background-color: #f0f0f0;
+  }
+  
+  .host-addgame{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 100px;
+     
+    }
+  
+
+    /* create New Game Night */
+   .nav3{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0; /* Just for visualization */
+    padding: 10px;
+   }
+
+   .dashboard{
+    background-color: #2200ff;
+    color: white;
+    border-radius: 17px;
+   }
+
+
+
+   /* addgame */
+   .nav4{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0; /* Just for visualization */
+    padding: 10px;
+   }
+
+   .addgame-container {
+   text-align: center;
+   }
+
+  
+
+
+
+
+
+
+
+   /* past Game Nights Page */
+
+    .nav5{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0; /* Just for visualization */
+    padding: 10px;
+   }
+
+
+
+
+   /* Search Results */
+   .nav6{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0; /* Just for visualization */
+    padding: 10px;
+   }
+
+
+
+
+   .nav7{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0; /* Just for visualization */
+    padding: 10px;
+   }
+
