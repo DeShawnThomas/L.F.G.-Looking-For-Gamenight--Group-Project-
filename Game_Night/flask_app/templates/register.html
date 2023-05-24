@@ -5,45 +5,69 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="static/css/styles.css">
     <title>Registration</title>
 </head>
 <body>
     <div class="container">
         <div class="title">Registration</div>
         <div class="content">
-          <form action="#">
+          <form action="/create" method="post">
             <div class="user-details">
               <div class="input-box">
-                <span class="details">First Name</span>
-                <input type="text" placeholder="Enter your name" >
+                <span class="details">
+                  <label for="first_name">First Name:</label>
+                </span>
+                <input type="text" id="first_name" name="first_name" placeholder="Enter your name">
               </div>
               <div class="input-box">
-                <span class="details">Last Name</span>
-                <input type="text" placeholder="Enter your username" >
+                <span class="details">
+                  <label for="last_name">Last Name:</label>
+                </span>
+                <input type="text" id="last_name" name="last_name" placeholder="Enter your username">
               </div>
               <div class="input-box">
-                <span class="details">Email</span>
-                <input type="text" placeholder="Enter your email" >
+                <span class="details">
+                  <label for="email">Email:</label>
+                </span>
+                <input type="text" id="email" name="email" placeholder="Enter your email">
               </div>
               <div class="input-box">
-                <span class="details">Phone Number</span>
-                <input type="text" placeholder="Enter your number" >
+                <span class="details">
+                  <label for="phone_number">Phone Number:</label>
+                </span>
+                <input type="text" id="phone_number" name="phone_number" placeholder="Enter your number">
               </div>
               <div class="input-box">
-                <span class="details">Password</span>
-                <input type="text" placeholder="Enter your password" >
+                <span class="details">
+                  <label for="password">Password:</label>
+                </span>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
               </div>
               <div class="input-box">
-                <span class="details">Confirm Password</span>
-                <input type="text" placeholder="Confirm your password" >
+                <span class="details">
+                  <label for="confirm_password">Confirm Password:</label>
+                </span>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password">
+              </div>
+              <div class="input-box">
+                <span class="details">
+                  <label for="user_description">About Me:</label>
+                </span>
+                <textarea id="user_description" name="user_description" placeholder="Tell us about yourself"></textarea>
+              </div>
+              <div class="input-box">
+                <span class="details">
+                  <label for="user_location">Location:</label>
+                </span>
+                <input type="text" id="user_location" name="user_location" placeholder="Enter your location">
               </div>
             </div>
             <div class="option-details"> 
-              <span class="host-title">Can You host?</span>
+              <span class="host-title">Can You Host?</span>
               <div class="category">
-                <label for="option">Select Option:</label>
-                <select id="option" name="option">
+                <label for="can_host">Select Option:</label>
+                <select id="can_host" name="can_host">
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
@@ -55,6 +79,5 @@
           </form>
         </div>
       </div>
-   
 </body>
 </html>

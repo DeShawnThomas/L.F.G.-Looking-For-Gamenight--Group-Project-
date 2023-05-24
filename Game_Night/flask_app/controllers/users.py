@@ -1,8 +1,8 @@
 from flask import render_template,request,session,redirect,flash
 from flask_app import app
-# from flask_app import (placeholder incase we end up needing to import some icons)
 from flask_app.models.user import User
 from flask_bcrypt import Bcrypt
+# from flask_app import (placeholder incase we end up needing to import some icons)
 
 bcrypt = Bcrypt(app)
 
@@ -29,10 +29,11 @@ def create_user():
         "email": request.form['email'],
         "phone_number": request.form['phone_number'],
         "password": request.form['password'],
-        "confirm_password": request.form['confirm_password'],
+        "confirm_password": request.form['confirm_password'],\
+        "can_host": request.form['can_host'],
         "user_location": request.form['user_location'],
         "user_description": request.form['user_description'],
-        "user_image": request.form['user_image'],
+        # "user_image": request.form['user_image'],
     }
 
     hashed_password = bcrypt.generate_password_hash(user_data['password'])
@@ -46,28 +47,28 @@ def create_user():
 
 @app.route('/returning', methods=['POST'])
 def login_user():
-    user = User.get_one_by_email(request.form['email'])
+    email_or_phone = request.form['email']
+    password = request.form['password']
 
-    if not User.validate_login(request.form):
-        return redirect('/login') 
-
+    user = User.get_by_email(email_or_phone)
     if not user:
-        flash("Invalid Email","login")
-        return redirect('/login')
-    if not bcrypt.check_password_hash(user.password, request.form['password']):
-        flash("Invalid Password","login")
+        user = User.get_by_phone_number(email_or_phone)
+
+    if not user or not User.check_password(user.password, password):
+        flash("Invalid email or password", "login")
         return redirect('/login')
 
     session['user_id'] = user.id
 
     return redirect('/dashboard')
 
+
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' not in session:
         return redirect('/logout')
     
-    user = User.get_one(session['user_id'])
+    user = User.get_by_id(session['user_id'])
 
     return render_template('dashboard.html', user=user)
 
@@ -76,7 +77,7 @@ def user_profile(user_id):
     if 'user_id' not in session:
         return redirect('/logout')
     
-    user = User.get_one(user_id)
+    user = User.get_by_id(user_id)
 
     return render_template('my_profile.html', user=user)
 
@@ -85,7 +86,7 @@ def edit_user(user_id):
     if 'user_id' not in session:
         return redirect('/logout')
     
-    user = User.get_one(user_id)
+    user = User.get_by_id(user_id)
 
     return render_template('edit_profile.html', user=user)
 

@@ -2,68 +2,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <title>Host Game</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <title>Host Game</title>
 </head>
 <body>
-    <div class="nav3">
-        <h1>New Game Night</h1>
-        <button class="dashboard">Dashboard</button>
-    </div>
+  <div class="nav3">
+    <h1>New Game Night</h1>
+    <button class="dashboard">Dashboard</button>
+  </div>
 
-    <div class="container">
-      
-        <div class="content">
-          <form action="#">
-            <div class="user-details">
-              <div class="input-box">
-            
-                <label for="date">Date</label>
-                <input type="date" id="date">
-              </div>
-              <div class="input-box">
-                <label for="hosting">Are You Hosting?</label>
-               
-                 <select id="hosting">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                 </select>
-              </div>
-              <div class="input-box">
-                <span class="details">Location</span>
-                <input type="text" placeholder="Enter your Location">
-              </div>
-              <div class="input-box">
-                <span class="details">If not, Which user is?</span>
-                <input type="text" placeholder="Enter User">
-              </div>
-              <div class="input-box">
-                <span class="details">Description</span>
-                <input type="text" placeholder="Enter your Description">
-              </div>
-              <div class="input-box">
-                <label for="hosting">Max # of People?</label>
-               
-                <select id="hosting">
-                   <option value="1">1</option>
-                   <option value="2">2</option>
-                   <option value="3">3</option>
-                   <option value="4">4</option>
-                   <option value="5">5</option>
-                   <option value="6">6</option>
-                </select>
-              </div>
-            </div>
-            <div class="button">
-              <input type="submit" value="submit Game Night">
-            </div>
-          </form>
+  <div class="container">
+    <div class="content">
+      <form action="/new/night/entry" method="post">
+        <div class="user-details">
+          <div class="input-box">
+            <label for="game_date">Date</label>
+            <input type="date" id="game_date" name="game_date">
+          </div>
+          <div class="input-box">
+            <span class="details">
+              <label for="game_time">Time</label>
+            </span>
+            <input type="time" id="game_time" name="game_time">
+          </div>
+          <div class="input-box">
+            <label for="host">Are you hosting?</label>
+            <select id="host" name="host">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="input-box">
+            <span class="details">
+              <label for="game_location">Location</label>
+            </span>
+            <input type="text" id="game_location" name="game_location" placeholder="Enter your Location">
+          </div>
+          <div class="input-box">
+            <span class="details">
+              <label for="alt_host">If not, what is the name of the user who is?</label>
+            </span>
+            <input type="text" id="alt_host" name="alt_host" placeholder="Enter User">
+          </div>
+          <div class="input-box">
+            <span class="details">
+              <label for="game_night_description">Description</label>
+            </span>
+            <input type="text" id="game_night_description" name="game_night_description" placeholder="Enter your Description">
+          </div>
+          <div class="input-box">
+            <label for="player_amount">Max # of People?</label>
+            <select id="player_amount" name="player_amount">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
         </div>
-      </div>
-
-
+        <input type="hidden" name="event_type" value="Game Night">
+        <div class="button">
+          <input type="submit" value="Submit Game Night">
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>

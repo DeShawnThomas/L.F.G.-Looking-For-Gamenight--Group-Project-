@@ -10,16 +10,16 @@ def new_game_night():
     if 'user_id' not in session:
         return redirect('/logout')
     
-    user = User.get_one(session['user_id'])
+    user = User.get_by_id(session['user_id'])
 
     return render_template('new_game_night.html', user=user)
 
 @app.route('/new/game')
 def add_a_game():
-    if 'user_id' not `i`n session:
+    if 'user_id' not in session:
         return redirect('/logout')
     
-    user = User.get_one(session['user_id'])
+    user = User.get_by_id(session['user_id'])
 
     return render_template('add_a_game.html', user=user)
 
@@ -29,18 +29,23 @@ def game_night_hosting():
         return redirect('/logout')
     
     if not Game.validate_game_night(request.form):
-        return redirect('/new/diary')
+        return redirect('/new/night')
 
     data = {
         'user_id': session['user_id'],
         'host': request.form['host'],
+        'alt_host': request.form['alt_host'],
         'player_amount': request.form['player_amount'],
         'game_location': request.form['game_location'],
         'game_date': request.form['game_date'],
+        'game_time': request.form['game_time'],
+        'game_night_description': request.form['game_night_description'],
+        'event_type': 'Game Night',
     }
-
-    Game.save(data)
+    
+    Game.save_game_night(data)
     return redirect('/dashboard')
+
 
 @app.route('/new/game/entry', methods=['POST'])
 def addition_to_collection():
@@ -48,14 +53,17 @@ def addition_to_collection():
         return redirect('/logout')
     
     if not Game.validate_game(request.form):
-        return redirect('/new/diary')
+        return redirect('/new/game')
 
     data = {
         'user_id': session['user_id'],
-        'game_name': request.form['game_name'],
-        'game_type': request.form['game_type'],
-        'game_description': request.form['game_description'],
-        'game_image': request.form['game_image'],
+        'host': request.form['host'],
+        'alt_host': request.form['alt_host'],
+        'player_amount': request.form['player_amount'],
+        'game_location': request.form['game_location'],
+        'game_date': request.form['game_date'],
+        'game_time': request.form['game_time'],
+        'game_night_description': request.form['game_night_description'],
     }
 
     Game.save(data)
@@ -66,7 +74,7 @@ def my_game_collection():
     if 'user_id' not in session:
         return redirect('/logout')
     
-    user = User.get_one(session['user_id'])
+    user = User.get_by_id(session['user_id'])
 
     games = Game.get_all()
 
@@ -77,7 +85,7 @@ def my_game_nights():
     if 'user_id' not in session:
         return redirect('/logout')
     
-    user = User.get_one(session['user_id'])
+    user = User.get_by_id(session['user_id'])
 
     game_nights = Game.get_all()
     # Might need to look into this one based on how we have the games table set atm.
@@ -89,7 +97,7 @@ def view_game(id):
     if 'user_id' not in session:
         return redirect('/logout')
 
-    user = User.get_one(session['user_id'])
+    user = User.get_by_id(session['user_id'])
 
     return render_template('view_game.html', user=user, game=Game.get_one_by_id({'id': id}))
 
@@ -98,7 +106,7 @@ def edit_game(id):
     if 'user_id' not in session:
         return redirect('/logout')
     
-    user = User.get_one(session['user_id'])
+    user = User.get_by_id(session['user_id'])
 
     return render_template('edit_game.html', user=user, game=Game.get_one_by_id({'id': id}))
 

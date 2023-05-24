@@ -2,33 +2,35 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 from flask_app.models import user
 
-
 class Game:
 
-    def __init__(self,data):
+    def __init__(self, data):
         self.id = data['id']
         self.game_name = data['game_name']
         self.game_type = data['game_type']
         self.game_description = data['game_description']
         self.game_image = data['game_image']
         self.host = data['host']
+        self.alt_host = data['alt_host']
         self.player_amount = data['player_amount']
         self.game_location = data['game_location']
         self.game_date = data['game_date']
+        self.game_time = data['game_time']  # Added game_time field
+        self.game_night_description = data['game_night_description']  # Added game_night_description field
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.creator = None
-        
+        self.players = []
 
     @classmethod
     def save_game(cls,data):
         query = "INSERT INTO games (game_name,game_type,game_description,game_image) VALUES (%(game_name)s,%(game_type)s,%(game_description)s,%(game_image)s);"
         return connectToMySQL("Game_Night_Schema").query_db(query,data)
-    
+        
     @classmethod
-    def save_game_night(cls,data):
-        query = "INSERT INTO games (host,player_amount,game_location,game_date) VALUES (%(host)s,%(player_amount)s,%(game_location)s,%(game_date)s);"
-        return connectToMySQL("Game_Night_Schema").query_db(query,data)
+    def save_game_night(cls, data):
+        query = "INSERT INTO games (host, alt_host, player_amount, game_location, game_date) VALUES (%(host)s, %(alt_host)s, %(player_amount)s, %(game_location)s, %(game_date)s);"
+        return connectToMySQL("Game_Night_Schema").query_db(query, data)
     
     @staticmethod
     def validate_game(game):
@@ -50,24 +52,22 @@ class Game:
     @staticmethod
     def validate_game_night(game):
         is_valid = True
-        query = "SELECT * FROM games;"
-        results = connectToMySQL("Game_Night_Schema").query_db(query,game)
         if len(game['host']) < 2:
-            flash("Host(s) name must be at least 2 characters",)
-            is_valid= False
-        # NGL having "host" in the db seems kinda redundant, wouldn't the host just be tied to user_id when submitting the game night?
-        if (game['player_amount']) < 1:
-            flash("Must have at least 1 player at the game night",)
-            is_valid= False
+            flash("Host name must be at least 2 characters")
+            is_valid = False
+        if len(game['alt_host']) < 2:
+            flash("Alternate host name must be at least 2 characters")
+            is_valid = False
+        if int(game['player_amount']) < 1:
+            flash("Must have at least 1 player at the game night")
+            is_valid = False
         if len(game['game_location']) < 2:
-            flash("Location must be at least 2 characters",)
-            is_valid= False
-            # dunno if this will change to == '' if we use location API
-        if (game['game_date']) == '':
-            flash("A date for game night must be at least 2 characters",)
-            is_valid= False
-        
-        return is_valid
+            flash("Location must be at least 2 characters")
+            is_valid = False
+        if len(game['game_date']) < 2:
+            flash("A date for the game night must be provided")
+            is_valid = False
+        return is_valid    
     
     @classmethod
     def delete(cls,data):
