@@ -25,6 +25,16 @@ class User:
         self.updated_at = data['updated_at']
         self.games = []
 
+    def get_nights(self):
+        from flask_app.models.night import Night
+        query = "SELECT * FROM nights WHERE user_id = %(id)s;"
+        data = {'id': self.id}
+        results = connectToMySQL(self.db).query_db(query, data)
+        night_object_list = []
+        for night_data in results:
+            night_object = Night(night_data)
+            night_object_list.append(night_object)
+        return night_object_list
 
     @classmethod
     def save(cls,data):
