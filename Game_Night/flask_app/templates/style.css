@@ -272,6 +272,28 @@
     padding: 10px;
    }
 
+  .rating {
+    display: inline-block;
+  }
+  
+  .rating input[type="radio"] {
+    display: none;
+  }
+  
+  .rating label {
+    font-size: 25px;
+    color: #ccc;
+    cursor: pointer;
+  }
+  
+  .rating label:before {
+    content: '\2605';
+  }
+  
+  .rating input[type="radio"]:checked ~ label {
+    color: gold;
+  }
+
 
 
 
@@ -284,6 +306,19 @@
     padding: 10px;
    }
 
+   .search-bar2{
+   
+    width: 300px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid blue;
+    justify-content: flex-end;
+    
+  }
+  .bar2{
+    display: flex;
+    justify-content: flex-end;
+  }
 
 
 /* my game nights page */
@@ -295,3 +330,5 @@
     padding: 10px;
    }
 
+
+   
