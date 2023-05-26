@@ -20,14 +20,8 @@ class Game:
     
     def get_creator(self):
         from flask_app.models.user import User
-        query = "SELECT * FROM users WHERE id = %(user_id)s;"
-        data = {'user_id': self.user_id}
-        result = connectToMySQL(self.db).query_db(query, data)
-        if len(result) > 0:
-            creator_data = result[0]
-            creator = User(creator_data)
-            return creator
-        return None
+        creator = User.get_by_id({'id': self.user_id})
+        return creator
 
     @classmethod
     def save_game(cls, data):
@@ -55,11 +49,12 @@ class Game:
 
     @classmethod
     def update(cls, data):
-        query = "UPDATE games SET game_name = %(game_name)s, game_type = %(game_type)s, game_description = %(game_description)s, game_image = %(game_image)s, user_id = %(user_id)s, updated_at = %(updated_id)s WHERE id = %(id)s;"
+        query = "UPDATE games SET game_name = %(game_name)s, game_type = %(game_type)s, game_description = %(game_description)s, game_image = %(game_image)s WHERE id = %(id)s;"
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
     def get_by_id(cls, data):
+        from flask_app.models.user import User
         query = "SELECT * FROM games JOIN users ON games.user_id = users.id WHERE games.id = %(id)s;"
         results = connectToMySQL(cls.db).query_db(query, data)
         if len(results) == 0:
@@ -84,29 +79,34 @@ class Game:
             user_object = User(new_user_d)
             game_object.creator = user_object
             return game_object
-
+        
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM games JOIN users ON games.user_id = users.id;"
+        query = "SELECT games.id AS game_id, games.game_name, games.game_type, games.game_description, games.game_image, games.created_at, games.updated_at, users.id AS user_id, users.first_name, users.last_name, users.email, users.phone_number, users.password, users.can_host, users.user_location, users.user_description, users.user_image, users.created_at AS user_created_at, users.updated_at AS user_updated_at FROM games JOIN users ON games.user_id = users.id;"
         results = connectToMySQL(cls.db).query_db(query)
         game_object_list = []
-        for user_d in results:
-            game_object = cls(user_d)
-            new_user_d = {
-                'id': user_d['users.id'],
-                'first_name': user_d['first_name'],
-                'last_name': user_d['last_name'],
-                'email': user_d['email'],
-                'phone_number': user_d['phone_number'],
-                'password': user_d['password'],
-                'can_host': user_d['can_host'],
-                'user_location': user_d['user_location'],
-                'user_description': user_d['user_description'],
-                'user_image': user_d['user_image'],
-                'created_at': user_d['users.created_at'],
-                'updated_at': user_d['users.updated_at']
+        for result in results:
+            game_data = {
+                'id': result['game_id'],
+                'game_name': result['game_name'],
+                'game_type': result['game_type'],
+                'game_description': result['game_description'],
+                'game_image': result['game_image'],
+                'created_at': result['created_at'],
+                'updated_at': result['updated_at'],
+                'user_id': result['user_id']
             }
-            user_object = User(new_user_d)
-            game_object.creator = user_object
+            game_object = cls(game_data)
+            game_object_list.append(game_object)
+        return game_object_list
+
+    @classmethod
+    def get_user_games(cls, user_id):
+        query = "SELECT * FROM games WHERE user_id = %(user_id)s;"
+        data = {'user_id': user_id}
+        results = connectToMySQL(cls.db).query_db(query, data)
+        game_object_list = []
+        for game_data in results:
+            game_object = cls(game_data)
             game_object_list.append(game_object)
         return game_object_list

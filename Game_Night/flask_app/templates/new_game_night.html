@@ -1,73 +1,69 @@
-<!-- This is the page to enter the new game night. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/styles.css">
   <title>Host Game</title>
 </head>
-<body>
-  <div class="nav3">
-    <h1>New Game Night</h1>
-    <button class="dashboard">Dashboard</button>
+<body class="bg-blue-400">
+  <div class="nav3 flex justify-between items-center py-4 px-8 bg-blue-900 text-white">
+    <h1 class="text-2xl font-bold">New Game Night</h1>
+    <a href="/dashboard" class="dashboard button bg-red-500 hover:bg-red-600">Dashboard</a>
   </div>
 
-  <div class="container">
-    <div class="content">
+  <div class="container mx-auto mt-8">
+    <div class="content bg-gray-300 rounded-lg border-2 border-black p-8">
       <form action="/new/night/entry" method="post">
-        <div class="user-details">
-          <div class="input-box">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="input-box bg-white rounded-md p-4">
             <label for="game_date">Date</label>
-            <input type="date" id="game_date" name="game_date">
+            <input type="date" id="game_date" name="game_date" class="border border-gray-300 rounded-md px-4 py-2">
           </div>
-          <div class="input-box">
-            <span class="details">
-              <label for="game_time">Time</label>
-            </span>
-            <input type="time" id="game_time" name="game_time">
+          <div class="input-box bg-white rounded-md p-4">
+            <label for="game_time">Time</label>
+            <input type="time" id="game_time" name="game_time" class="border border-gray-300 rounded-md px-4 py-2">
           </div>
-          <div class="input-box">
+          <div class="input-box bg-white rounded-md p-4">
             <label for="host">Are you hosting?</label>
-            <select id="host" name="host">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+            <select id="host" name="host" class="border border-gray-300 rounded-md px-4 py-2">
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
             </select>
           </div>
-          <div class="input-box">
-            <span class="details">
-              <label for="game_location">Location</label>
-            </span>
-            <input type="text" id="game_location" name="game_location" placeholder="Enter your Location">
+          <div class="input-box bg-white rounded-md p-4">
+            <label for="game_location">Location</label>
+            <input type="text" id="game_location" name="game_location" placeholder="Enter your Location" class="border border-gray-300 rounded-md px-4 py-2">
           </div>
-          <div class="input-box">
-            <span class="details">
-              <label for="alt_host">If not, what is the name of the user who is?</label>
-            </span>
-            <input type="text" id="alt_host" name="alt_host" placeholder="Enter User">
+          <div class="input-box bg-white rounded-md p-4">
+            <label for="alt_host">If not, what is the name of the user who is?</label>
+            <input type="text" id="alt_host" name="alt_host" placeholder="Enter User" class="border border-gray-300 rounded-md px-4 py-2">
           </div>
-          <div class="input-box">
-            <span class="details">
-              <label for="night_description">Description</label>
-            </span>
-            <input type="text" id="night_description" name="night_description" placeholder="Enter your Description">
+          <div class="input-box bg-white rounded-md p-4">
+            <label for="night_description">Description</label>
+            <input type="text" id="night_description" name="night_description" placeholder="Enter your Description" class="border border-gray-300 rounded-md px-4 py-2">
           </div>
-          <div class="input-box">
+          <div class="input-box bg-white rounded-md p-4">
             <label for="player_amount">Max # of People?</label>
-            <select id="player_amount" name="player_amount">
+            <select id="player_amount" name="player_amount" class="border border-gray-300 rounded-md px-4 py-2">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
               <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>'
+              <option value="9">9</option>
+              <option value="10">10</option>
             </select>
           </div>
         </div>
         <input type="hidden" name="event_type" value="Game Night">
-        <div class="button">
-          <input type="submit" value="Submit Game Night">
+        <div class="button mt-4 col-span-2 flex justify-center">
+          <input type="submit" value="Submit Game Night" class="button bg-green-500 hover:bg-green-600">
         </div>
       </form>
     </div>

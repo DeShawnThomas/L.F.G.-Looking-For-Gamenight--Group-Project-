@@ -90,6 +90,39 @@ def edit_user(user_id):
 
     return render_template('edit_profile.html', user=user)
 
+@app.route('/user/update/<int:user_id>', methods=['POST'])
+def update_user(user_id):
+    if 'user_id' not in session:
+        return redirect('/logout')
+
+    if not User.validate_user(request.form):
+        return redirect(f'/user/edit/{user_id}')
+
+    user = User.get_by_id(user_id)
+
+    if 'password' in request.form:
+        password = request.form['password']
+        hashed_password = bcrypt.generate_password_hash(password)
+    else:
+        hashed_password = user.password
+
+    user_data = {
+        "id": user_id,
+        "first_name": request.form['first_name'],
+        "last_name": request.form['last_name'],
+        "email": request.form['email'],
+        "phone_number": request.form['phone_number'],
+        "can_host": request.form['can_host'],
+        "user_location": request.form['user_location'],
+        "user_description": request.form['user_description'],
+        "password": hashed_password,
+        # "user_image": request.form['user_image'],
+    }
+
+    User.update(user_data)
+
+    return redirect(f'/user/{user_id}')
+
 @app.route('/logout')
 def logout():
     session.clear()

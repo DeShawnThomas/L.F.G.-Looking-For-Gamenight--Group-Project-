@@ -1,46 +1,42 @@
-<!-- This the page to add new games to your collection to display on collection.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/styles.css">
-    <title>Add game</title>
+    <title>Add Game</title>
 </head>
-<body>
-    <div class="nav4">
-        <h1>Add Game</h1>
-        <button class="dashboard">Dashboard</button>
+<body class="bg-blue-400">
+    <div class="nav3 flex justify-between items-center py-4 px-8 bg-blue-900 text-white">
+        <h1 class="text-2xl font-bold">Add Game</h1>
+        <a href="/dashboard" class="dashboard button bg-red-500 hover:bg-red-600">Dashboard</a>
     </div>
 
-
-    <div class="addgame-container">
-        <div class="add-game-title">
-            <p>Game Nights can't function without Games!</p>
-            <p>Add a new one you have to the collection here</p>
+    <div class="container mx-auto mt-8">
+        <div class="content bg-gray-300 rounded-lg border-2 border-black p-8">
+            <form action="/new/game/entry" method="POST">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="input-box bg-white rounded-md p-4">
+                        <label for="game_name">Name of game</label>
+                        <input type="text" class="border border-gray-300 rounded-md px-4 py-2" id="game_name" name="game_name" required>
+                    </div>
+                    <div class="input-box bg-white rounded-md p-4">
+                        <label for="game_type">Type of Game</label>
+                        <input type="text" class="border border-gray-300 rounded-md px-4 py-2" id="game_type" name="game_type" required>
+                    </div>
+                    <div class="input-box bg-white rounded-md p-4 col-span-2">
+                        <label for="game_description">Game Description</label>
+                        <textarea class="border border-gray-300 rounded-md px-4 py-2 w-full" id="game_description" name="game_description" required></textarea>
+                    </div>
+                </div>
+                <input type="hidden" id="game_image" name="game_image" value="default_image.jpg">
+                <div class="button mt-4 col-span-2 flex justify-center">
+                    <button type="submit" class="button bg-yellow-500 hover:bg-yellow-600">Submit</button>
+                </div>
+            </form>
         </div>
-    
-        <div class="game-description">
-            <span class="details">Name of Game</span>
-            <br>
-            <input type="text" placeholder="Enter your Game" >
-            <br>
-            <span class="details">Type of Game</span>
-            <br>
-            <input type="text" placeholder="Enter type of game" >
-        </div>
-    </div>
-
-            <div class="mb-3 form-check">
-             
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-
-
-
     </div>
 </body>
 </html>

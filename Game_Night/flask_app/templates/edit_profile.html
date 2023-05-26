@@ -1,59 +1,69 @@
-<!-- This is the page for editing a profile! -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Edit Profile</title>
 </head>
-<body>
-    <div class="container">
-        <div class="title">Edit Profile Information</div>
-        <div class="content">
-          <form action="#">
+<body class="bg-blue-400">
+    <div class="nav3 flex justify-between items-center py-4 px-8 bg-blue-900 text-white">
+        <h1 class="text-2xl font-bold">L.F.G.</h1>
+        <a href="/dashboard" class="dashboard button bg-red-500 hover:bg-red-600">Dashboard</a>
+    </div>
+    <div class="title text-center text-3xl font-bold mt-8">Edit Profile Information</div>
+    <div class="content mx-auto max-w-lg bg-gray-300 p-8 rounded border-2 border-black mt-8">
+        <form action="/user/update/{{user.id}}" method="post">
             <div class="user-details">
-              <div class="input-box">
-                <span class="details">First Name</span>
-                <input type="text" placeholder="Enter your name" required>
-              </div>
-              <div class="input-box">
-                <span class="details">Last Name</span>
-                <input type="text" placeholder="Enter your username" required>
-              </div>
-              <div class="input-box">
-                <span class="details">Email</span>
-                <input type="text" placeholder="Enter your email" required>
-              </div>
-              <div class="input-box">
-                <span class="details">Phone Number</span>
-                <input type="text" placeholder="Enter your number" required>
-              </div>
-              <div class="input-box">
-                <span class="details">Password</span>
-                <input type="text" placeholder="Enter your password" required>
-              </div>
-              <div class="input-box">
-                <span class="details">Confirm Password</span>
-                <input type="text" placeholder="Confirm your password" required>
-              </div>
+                <div class="input-box my-4">
+                    <span class="details">First Name</span>
+                    <input type="text" name="first_name" placeholder="Enter your name" value="{{user.first_name}}" required class="border-2 border-gray-400 rounded p-2 w-full">
+                </div>
+                <div class="input-box my-4">
+                    <span class="details">Last Name</span>
+                    <input type="text" name="last_name" placeholder="Enter your username" value="{{user.last_name}}" required class="border-2 border-gray-400 rounded p-2 w-full">
+                </div>
+                <div class="input-box my-4">
+                    <span class="details">Email</span>
+                    <input type="email" name="email" placeholder="Enter your email" value="{{user.email}}" required class="border-2 border-gray-400 rounded p-2 w-full">
+                </div>
+                <div class="input-box my-4">
+                    <span class="details">Phone Number</span>
+                    <input type="text" name="phone_number" placeholder="Enter your number" value="{{user.phone_number}}" required class="border-2 border-gray-400 rounded p-2 w-full">
+                </div>
+                <div class="input-box my-4">
+                    <span class="details">Password</span>
+                    <input type="password" name="password" placeholder="Enter your password" required class="border-2 border-gray-400 rounded p-2 w-full">
+                </div>
+                <div class="input-box my-4">
+                    <span class="details">Confirm Password</span>
+                    <input type="password" name="confirm_password" placeholder="Confirm your password" required class="border-2 border-gray-400 rounded p-2 w-full">
+                </div>
+                <div class="input-box my-4">
+                    <span class="details">Location</span>
+                    <input type="text" name="user_location" placeholder="Enter your location" value="{{user.user_location}}" required class="border-2 border-gray-400 rounded p-2 w-full">
+                </div>
+                <div class="input-box my-4">
+                    <span class="details">Description</span>
+                    <textarea name="user_description" placeholder="Enter your description" required class="border-2 border-gray-400 rounded p-2 w-full">{{user.user_description}}</textarea>
+                </div>
+                <input type="hidden" name="user_image" value="{{user.user_image}}">
             </div>
-            <div class="option-details"> 
-              <span class="host-title">Can You host?</span>
-              <div class="category">
-                <label for="option">Select Option:</label>
-                <select id="option" name="option">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-              </div>
+            <div class="option-details my-4"> 
+                <span class="host-title">Can You Host?</span>
+                <div class="category">
+                    <label for="option"></label>
+                    <select id="option" name="can_host" class="border-2 border-gray-400 rounded p-2 w-full">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
             </div>
-            <div class="button">
-              <input type="submit" value="Edit Profile">
+            <div class="button text-center mt-4">
+                <input type="submit" value="Edit Profile" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
             </div>
-          </form>
-        </div>
-      </div>
+        </form>
+    </div>
 </body>
 </html>

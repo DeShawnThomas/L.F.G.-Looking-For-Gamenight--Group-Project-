@@ -25,6 +25,9 @@ class User:
         self.updated_at = data['updated_at']
         self.games = []
 
+    def get_user_games(self):
+        self.games = Game.get_user_games(self.id)
+
     def get_nights(self):
         from flask_app.models.night import Night
         query = "SELECT * FROM nights WHERE user_id = %(id)s;"
@@ -43,8 +46,8 @@ class User:
     
     @classmethod
     def update(cls,data):
-        query = "UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, eamil=%(email)s, phone_number=%(phone_number)s, password=%(password)s, can_host = %(can_host)s, user_location=%(user_location)s, user_description=%(user_description)s, updated_at = %(updated_at)s, WHERE id = %(id)s;"
-        return connectToMySQL("moment_schema").query_db(query,data)
+        query = "UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, email=%(email)s, phone_number=%(phone_number)s, password=%(password)s, can_host = %(can_host)s, user_location=%(user_location)s, user_description=%(user_description)s WHERE id = %(id)s;"
+        return connectToMySQL(cls.db).query_db(query,data)
 
     @classmethod
     def get_all(cls):
